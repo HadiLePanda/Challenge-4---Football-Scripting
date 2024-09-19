@@ -11,7 +11,7 @@ public class PlayerControllerX : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private float speed = 500f;
-    [SerializeField] private float boostForce = 500f;
+    [SerializeField] private float boostForce = 20f;
     [SerializeField] private float boostCooldown = 1f;
     [Tooltip("How hard to hit enemy without powerup")]
     [SerializeField] private float normalStrength = 10;

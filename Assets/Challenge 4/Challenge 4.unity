@@ -589,7 +589,7 @@ MonoBehaviour:
   powerupIndicator: {fileID: 1427939658}
   smokeParticle: {fileID: 1723863497}
   speed: 500
-  boostForce: 25
+  boostForce: 20
   boostCooldown: 1
   normalStrength: 10
   powerupStrength: 25
