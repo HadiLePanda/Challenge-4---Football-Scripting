@@ -5,6 +5,7 @@ public class PlayerControllerX : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private AudioSource playerAudio;
     [SerializeField] private GameObject focalPoint;
     [SerializeField] private GameObject powerupIndicator;
     [SerializeField] private ParticleSystem smokeParticle;
@@ -18,6 +19,11 @@ public class PlayerControllerX : MonoBehaviour
     [Tooltip("How hard to hit enemy with powerup")]
     [SerializeField] private float powerupStrength = 25;
     [SerializeField] private float powerUpDuration = 5f;
+
+    [Header("Settings")]
+    [SerializeField] private AudioClip boostSound;
+    [SerializeField] private AudioClip shootSound;
+    [SerializeField] private AudioClip powerupPickupSound;
 
     private bool hasPowerup;
     private Coroutine powerupRoutine;
@@ -66,6 +72,9 @@ public class PlayerControllerX : MonoBehaviour
 
         // play boost particle
         smokeParticle.Play();
+
+        // play boost sound
+        AudioManager.singleton.PlaySourceOneShot(playerAudio, boostSound);
     }
 
     // coroutine to count down powerup duration
@@ -87,6 +96,9 @@ public class PlayerControllerX : MonoBehaviour
             // activate powerup state
             hasPowerup = true;
             powerupIndicator.SetActive(true);
+
+            // play powerup pickup sound
+            AudioManager.singleton.PlaySourceOneShot(playerAudio, powerupPickupSound);
 
             // remove powerup state after its duration
             if (powerupRoutine != null)
@@ -115,6 +127,9 @@ public class PlayerControllerX : MonoBehaviour
                 // shoot it with normal strength
                 enemyRb.AddForce(awayFromPlayer * normalStrength, ForceMode.Impulse);
             }
+
+            // play shoot sound
+            playerAudio.PlayOneShot(shootSound);
         }
     }
 }

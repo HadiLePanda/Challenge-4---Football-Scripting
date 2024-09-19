@@ -4,9 +4,13 @@ public class EnemyX : MonoBehaviour
 {
     [Header("References")]
     public Rigidbody rb;
+    //public AudioSource enemyAudio;
 
     [Header("Settings")]
-    public float baseSpeed = 5f;
+    [SerializeField] private float baseSpeed = 5f;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip goalSound;
 
     private float speed;
     private PlayerGoal playerGoal;
@@ -39,10 +43,20 @@ public class EnemyX : MonoBehaviour
         // if enemy collides with either goal, destroy it
         if (other.gameObject.name == "Enemy Goal")
         {
+            // play goal sound
+            AudioManager.singleton.Play2DOneShot(goalSound);
+            //enemyAudio.PlayOneShot(goalSound);
+
+            // destroy
             Destroy(gameObject);
         } 
         else if (other.gameObject.name == "Player Goal")
         {
+            // play goal sound
+            AudioManager.singleton.Play2DOneShot(goalSound);
+            //enemyAudio.PlayOneShot(goalSound);
+
+            // destroy
             Destroy(gameObject);
         }
     }
